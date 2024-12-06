@@ -1,40 +1,26 @@
-
 import React, { useState } from "react";
 import image from "./assets/logo.webp";
+import photo from "./assets/image.png"; // Replace with the correct path to your photo
 
 const App = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showImage, setShowImage] = useState(false);
-
-  // const handleSubmit = () => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     if (input.toLowerCase() === "hacktify") {
-  //       setShowImage(true);
-  //     } else {
-  //       alert("No matching patrika found!");
-  //     }
-  //   }, 2000);
-  // };
+  const [showResume, setShowResume] = useState(false);
 
   const handleSubmit = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setShowImage(true);  // Show image for any input
+      setShowResume(true); // Show resume for any input
     }, 2000);
   };
-  
-  const closeImage = () => {
-    setShowImage(false);
+
+  const closeResume = () => {
+    setShowResume(false);
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-200 font-sans relative"
-    >
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-200 font-sans relative">
       {/* Loading Overlay */}
       {loading && (
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-sm">
@@ -128,22 +114,54 @@ const App = () => {
         </div>
       </section>
 
-      {/* Image Overlay Section */}
-      {showImage && (
-        <div className="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          {/* Close Button */}
-          <button
-            onClick={closeImage}
-            className="absolute top-4 right-4 bg-gray-800 text-white text-2xl rounded-full p-2 hover:bg-gray-600"
-          >
-            &times;
-          </button>
-          {/* Image */}
-          <img
-            src={image}
-            alt="CyberPatrika"
-            className="max-w-full max-h-full rounded-lg shadow-lg"
-          />
+      {/* Resume Overlay Section */}
+      {showResume && (
+        <div className="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative">
+            {/* Close Button */}
+            <button
+              onClick={closeResume}
+              className="absolute top-4 right-4 bg-gray-800 text-white text-2xl rounded-full p-2 hover:bg-gray-600"
+            >
+              &times;
+            </button>
+
+            {/* Resume Header */}
+            <div className="text-center border-b pb-6">
+              <h1 className="text-3xl font-bold text-orange-600">
+                CyberPatrika
+              </h1>
+              <p className="text-gray-600 mt-2">
+                Your personalized cyber profile at a glance
+              </p>
+            </div>
+
+            {/* Resume Content */}
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center">
+                <img
+                  src={photo}
+                  alt="Profile"
+                  className="w-24 h-24 rounded-full border border-gray-300"
+                />
+                <div className="ml-4">
+                  <h2 className="text-xl font-bold text-gray-800">John Doe</h2>
+                  <p className="text-gray-600">johndoe@example.com</p>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800">Personal Details</h3>
+                <ul className="mt-2 text-gray-600">
+                  <li><strong>Mobile Number:</strong> +123 456 7890</li>
+                  <li><strong>City Born:</strong> Mumbai</li>
+                  <li><strong>Favourite Color:</strong> Blue</li>
+                  <li><strong>Pet Name:</strong> Buddy</li>
+                  <li><strong>School Visited:</strong> XYZ High School</li>
+                  <li><strong>First Employer:</strong> ABC Corp</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
